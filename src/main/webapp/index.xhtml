@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html">
+
+<head>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"></link>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>	
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+</head>
+
+<style>
+
+	.estoque {
+		margin-top:5rem;
+	}
+	
+	.panel-heading {
+		text-align:center;
+		font-size:2rem;
+	}
+	
+	th {
+		text-align:center;
+		font-weight:200;
+	}
+	
+</style>
+
+<body>
+	<div class="container">
+		<div class="estoque">
+			
+			<div class="panel panel-default">
+	 	 		<div class="panel-heading">Estoque 2014</div>
+				<table class="table">
+					<th>Mês</th><th>Produto</th><th>Recebimentos</th><th>Vendas</th><th>Em estoque</th><th>Preço</th><th>Lucro</th>
+
+				</table>
+			</div>		
+			
+			
+			<h:outputText value="#{produtoMBean.nome}" />
+		</div>	
+		<button class="btn btn-default" data-toggle="modal" data-target="#cadastroEstoque">Cadastro de Estoque</button>
+		
+		<div class="modal fade" id="cadastroEstoque">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title">Estoque</h4>
+					</div>
+					<div class="modal-body">
+						<select class="form-control">
+							<option>Janeiro</option>
+							<option>Fevereiro</option>
+							<option>Março</option>
+							<option>Abril</option>
+							<option>Maio</option>
+							<option>Junho</option>
+							<option>Julho</option>
+							<option>Agosto</option>
+							<option>Setembro</option>
+							<option>Outubro</option>
+							<option>Novembro</option>
+							<option>Dezembro</option>
+						</select>
+						<br></br>
+
+						<span>Produto</span>
+						<select class="form-control">
+							<!--  iterar sobre os produtos cadastrados -->
+						</select>
+						
+						<button type="button" class="btn btn-default" data-toggle="modal" data-target="#cadastroProduto">Cadastrar Produto</button>
+						
+						<br></br>
+						<span>Recebimentos</span>
+						<h:inputText 
+                            value="" styleClass="form-control">
+                        </h:inputText> <!--  #{estoqueMBean.estoque.recebimentos} -->
+                        <br></br>
+                        
+                        <span>Vendas</span>
+                        <h:inputText 
+                            value="" styleClass="form-control">
+                        </h:inputText><!-- #{estoqueMBean.estoque.vendas} -->
+                        <br></br>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal">Cadastrar</button>
+					</div>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+		
+		<div class="modal fade" id="cadastroProduto">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<h:form>
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+								<h4 class="modal-title">Produto</h4>
+						</div>
+						<div class="modal-body">
+								<span>Nome</span>
+								<h:inputText 
+		                            value="#{produtoMBean.nome}" styleClass="form-control">
+		                        </h:inputText> <!--  #{estoqueMBean.estoque.recebimentos} -->
+		                        <br></br>
+		                        
+		                        <span>Preço</span>
+		                        <h:inputText 
+		                            value="#{produtoMBean.preco}" styleClass="form-control">
+		                        </h:inputText><!-- #{estoqueMBean.estoque.vendas} -->
+		                        <br></br>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+		                    <h:commandButton value="Cadastrar" action="#{produtoMBean.cadastrarProduto}" styleClass="btn btn-primary"></h:commandButton>
+						</div>
+					</h:form>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+		
+	</div>
+</body>
+
+</html>
