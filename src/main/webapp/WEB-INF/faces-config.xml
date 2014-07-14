@@ -7,7 +7,7 @@
    
    <managed-bean>
         <managed-bean-name>ProdutoMBean</managed-bean-name>
-        <managed-bean-class>br.com.projeto.beans.ProdutoMBean</managed-bean-class>     
+        <managed-bean-class>br.com.projeto.bean.ProdutoMBean</managed-bean-class>     
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
    
