@@ -4,13 +4,14 @@ import java.util.List;
 
 import br.com.projeto.modelo.Produto;
 
-public class ProdutoDao {
+public class ProdutoDao implements IProdutoDao {
 
-	public void cadastrarProduto() {
+	public void salvarProduto(Produto produto) {
+		// TODO Auto-generated method stub
 		
 	}
-	
-	public List<Produto> produtosCadastrados() {
+
+	public List<Produto> produtosSalvos() {
 		List<Produto> produtos = null;
 		
 		return produtos;

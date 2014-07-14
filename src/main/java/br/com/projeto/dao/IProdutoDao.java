@@ -1,5 +1,10 @@
 package br.com.projeto.dao;
 
-public interface IProdutoDao {
+import java.util.List;
 
+import br.com.projeto.modelo.Produto;
+
+public interface IProdutoDao {
+	public void salvarProduto(Produto produto);
+	public List<Produto> produtosSalvos();
 }
