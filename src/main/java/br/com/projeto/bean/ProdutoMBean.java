@@ -4,7 +4,11 @@ import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
 import br.com.projeto.modelo.Produto;
+import br.com.projeto.persistence.HibernateUtil;
 
 @ManagedBean(name="produtoMBean")
 public class ProdutoMBean implements Serializable {
@@ -54,6 +58,19 @@ public class ProdutoMBean implements Serializable {
 		produto.setNome(nome);
 		produto.setPreco(preco);
 		System.out.println("Cadastrar Produto - "+produto.getNome()+"   "+produto.getPreco());
+		
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+	    System.out.println("Inicializado session factory"); 
+		Session session = sessionFactory.openSession();
+		System.out.println("sessao aberta");
+	    session.beginTransaction();  
+	    
+	    session.save(produto);
+	    
+	    session.getTransaction().commit();
+	    session.close();
+	    System.out.println("sessao fechada");
+		
 	}
 	
 }

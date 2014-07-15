@@ -13,7 +13,7 @@ public class HibernateUtil {
 	public static synchronized SessionFactory getSessionFactory() {
 		if (sessionFactory == null) {
 			try {
-				Configuration configuration = new Configuration().configure("/ProjetoJSF/src/main/resources/hibernate.cfg.xml");
+				Configuration configuration = new Configuration().configure();
 				StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().
 				applySettings(configuration.getProperties());
 				sessionFactory = configuration.buildSessionFactory(builder.build());
