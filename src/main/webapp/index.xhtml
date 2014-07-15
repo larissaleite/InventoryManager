@@ -1,7 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://java.sun.com/jsf/html">
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core">
 
 <head>
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"></link>
@@ -107,9 +108,9 @@
 							<br></br>
 						
 							<span>Produto</span>
-							<select class="form-control">
-								<!--  iterar sobre os produtos cadastrados -->
-							</select>
+							<h:selectOneMenu value="#{recebimentoMBean.produto}" styleClass="form-control">
+							    <f:selectItems value="#{recebimentoMBean.produtos}" var="produto" itemValue="#{produto}" itemLabel="#{produto.nome}" />
+							</h:selectOneMenu>
 		                    <br></br>    
 		                        
 		                    <span>Quantidade</span>
