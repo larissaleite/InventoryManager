@@ -64,6 +64,9 @@ public class RecebimentoMBean {
 		this.mes = mes;
 	}
 	
+	public Mes[] getMeses() {
+		return Mes.values();
+	}
 	
 	public List<Produto> getProdutos() {
 		return produtos;

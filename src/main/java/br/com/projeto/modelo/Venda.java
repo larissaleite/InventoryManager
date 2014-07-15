@@ -13,7 +13,7 @@ import javax.persistence.OneToOne;
 public class Venda {
 	
 	@Id
-	@GeneratedValue(strategy= GenerationType.SEQUENCE)
+	@GeneratedValue(strategy= GenerationType.AUTO)
 	@Column(name="id_venda", unique=true, nullable=false)
 	private int id;
 	

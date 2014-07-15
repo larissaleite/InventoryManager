@@ -90,38 +90,26 @@
 								<h4 class="modal-title">Recebimento - Produto</h4>
 						</div>
 						<div class="modal-body">
-						
-							<select class="form-control">
-								<option>Janeiro</option>
-								<option>Fevereiro</option>
-								<option>Março</option>
-								<option>Abril</option>
-								<option>Maio</option>
-								<option>Junho</option>
-								<option>Julho</option>
-								<option>Agosto</option>
-								<option>Setembro</option>
-								<option>Outubro</option>
-								<option>Novembro</option>
-								<option>Dezembro</option>
-							</select>
+							<h:selectOneMenu value="#{recebimentoMBean.mes}" styleClass="form-control">
+								<f:selectItems value="#{recebimentoMBean.meses}" var="mes" itemValue="#{mes}" itemLabel="#{mes.label}" />
+   			 				</h:selectOneMenu>
 							<br></br>
 						
 							<span>Produto</span>
-							<h:selectOneMenu value="#{recebimentoMBean.produto}" styleClass="form-control">
-							    <f:selectItems value="#{recebimentoMBean.produtos}" var="produto" itemValue="#{produto}" itemLabel="#{produto.nome}" />
+							<h:selectOneMenu value="#{recebimentoMBean.produto}" converter="Conversor" styleClass="form-control">
+							    <f:selectItems value="#{recebimentoMBean.produtos}" var="produto" itemValue="#{produto.id}" itemLabel="#{produto.nome}" />
 							</h:selectOneMenu>
 		                    <br></br>    
 		                        
 		                    <span>Quantidade</span>
 		                    <h:inputText 
-		                       value="" styleClass="form-control">
+		                       value="#{recebimentoMBean.quantidade}" styleClass="form-control">
 		                    </h:inputText>
 		                    <br></br>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-		                    <h:commandButton value="Cadastrar" action="#{produtoMBean.cadastrarProduto}" styleClass="btn btn-primary"></h:commandButton>
+		                    <h:commandButton value="Cadastrar" action="#{recebimentoMBean.cadastrarRecebimento}" styleClass="btn btn-primary"></h:commandButton>
 						</div>
 					</h:form>
 				</div><!-- /.modal-content -->
@@ -138,37 +126,26 @@
 						</div>
 						<div class="modal-body">
 						
-							<select class="form-control">
-								<option>Janeiro</option>
-								<option>Fevereiro</option>
-								<option>Março</option>
-								<option>Abril</option>
-								<option>Maio</option>
-								<option>Junho</option>
-								<option>Julho</option>
-								<option>Agosto</option>
-								<option>Setembro</option>
-								<option>Outubro</option>
-								<option>Novembro</option>
-								<option>Dezembro</option>
-							</select>
+							<h:selectOneMenu value="#{vendaMBean.mes}" styleClass="form-control">
+								<f:selectItems value="#{vendaMBean.meses}" var="mes" itemValue="#{mes}" itemLabel="#{mes.label}" />
+   			 				</h:selectOneMenu>
 							<br></br>
 						
 							<span>Produto</span>
-							<select class="form-control">
-								<!--  iterar sobre os produtos cadastrados -->
-							</select>
-		                    <br></br>
+							<h:selectOneMenu value="#{vendaMBean.produto}" styleClass="form-control">
+							    <f:selectItems value="#{vendaMBean.produtos}" var="produto" itemValue="#{produto.id}" itemLabel="#{produto.nome}" />
+							</h:selectOneMenu>
+		                    <br></br>    
 		                    
 		                    <span>Quantidade</span>
 		                    <h:inputText 
-		                       value="" styleClass="form-control">
+		                       value="#{vendaMBean.quantidade}" styleClass="form-control">
 		                    </h:inputText>
 		                    <br></br>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-		                    <h:commandButton value="Cadastrar" action="#{produtoMBean.cadastrarProduto}" styleClass="btn btn-primary"></h:commandButton>
+		                    <h:commandButton value="Cadastrar" action="#{vendaMBean.cadastrarVenda}" styleClass="btn btn-primary"></h:commandButton>
 						</div>
 					</h:form>
 				</div><!-- /.modal-content -->

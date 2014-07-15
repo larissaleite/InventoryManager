@@ -12,7 +12,7 @@
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
         <property name="show_sql">true</property>
         <!--  <property name="hibernate.hbm2ddl.auto">create</property>
-         automatically creates tables; only uncomment the first time it runs, otherwise it recreates the tables, losing previous data -->
+          automatically creates tables; only uncomment the first time it runs, otherwise it recreates the tables, losing previous data -->
         
         <mapping class="br.com.projeto.modelo.Produto"></mapping>
         <mapping class="br.com.projeto.modelo.Venda"></mapping>        
