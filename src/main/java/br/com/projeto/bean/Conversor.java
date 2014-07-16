@@ -4,7 +4,6 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import javax.persistence.Entity;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -25,9 +24,12 @@ public class Conversor implements Converter{
 		System.out.println("sessao aberta");
 	    session.beginTransaction();  
 	    
-		Query query = session.createQuery("from Produto where id_produto = :id");
-		query.setParameter("id", arg2);
+	    System.out.println("Id produto = "+arg2);
+		
+	    Query query = session.createQuery("from Produto where id_produto = '"+arg2+"'");
+		//query.setParameter("id", arg2); nao funciona
 		Object obj = query.list().get(0);
+		
 		if (obj instanceof Produto) {
 			System.out.println("objeto é um produto ---- "+((Produto) obj).getNome());
 			
@@ -38,9 +40,13 @@ public class Conversor implements Converter{
 	}
 
 	public String getAsString(FacesContext arg0, UIComponent arg1, Object arg2) {
-		/*tornar mais genérico */
-		Entity entity = (Entity) arg2;
-	    return ((UIComponent) entity).getId() != null ? String.valueOf(((UIComponent) entity).getId()) : null;
+		if (!(arg2 instanceof Produto)) {
+			return null;
+		}
+
+		String s =  String.valueOf(((Produto) arg2).getId());
+			
+		return s;
 	}
 
 }

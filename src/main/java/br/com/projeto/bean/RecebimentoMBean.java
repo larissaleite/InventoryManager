@@ -3,6 +3,7 @@ package br.com.projeto.bean;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -14,6 +15,7 @@ import br.com.projeto.modelo.Recebimento;
 import br.com.projeto.persistence.HibernateUtil;
 
 @ManagedBean(name="recebimentoMBean")
+@SessionScoped
 public class RecebimentoMBean {
 
 	private Produto produto;
@@ -77,12 +79,25 @@ public class RecebimentoMBean {
 	}
 
 	public void cadastrarRecebimento() {
+		System.out.println("Cadastrando recebimento");
 		Recebimento recebimento = new Recebimento();
 		recebimento.setMes(mes);
 		recebimento.setProduto(produto);
 		recebimento.setQuantidade(quantidade);
 		
 		System.out.println("Cadastrar recebimento - Qtd: "+quantidade+"  Produto: "+produto.getId()+"  Mes: "+mes);
+		
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+	    System.out.println("Inicializado session factory"); 
+		Session session = sessionFactory.openSession();
+		System.out.println("sessao aberta");
+	    session.beginTransaction();  
+	    
+	    session.save(recebimento);
+	    
+	    session.getTransaction().commit();
+	    session.close();
+	    System.out.println("sessao fechada");
 	}
 	
 	

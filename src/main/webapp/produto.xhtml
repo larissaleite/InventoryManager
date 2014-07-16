@@ -1,7 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://java.sun.com/jsf/html">
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <head>
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"></link>
@@ -20,7 +21,7 @@
 		font-size:2rem;
 	}
 	
-	th {
+	th, td {
 		text-align:center;
 		font-weight:200;
 	}
@@ -34,7 +35,27 @@
 	 	 		<div class="panel-heading">Produtos</div>
 				<table class="table">
 					<th>Nome</th><th>Preço</th><th>Vendas (total)</th><th>Lucro (total)</th>
-
+					
+					<ui:repeat var="p" value="#{recebimentoMBean.produtos}">
+					 
+						<tr>
+							<td>#{p.nome}</td>
+							<td>R$ #{p.preco}</td>
+							<td></td>
+							<td></td>
+						</tr>
+					 
+					   </ui:repeat><ui:repeat var="o" value="#{order.orderList}" varStatus="status">
+					 
+						<tr>
+							<td>#{o.orderNo}</td>
+							<td>#{o.productName}</td>
+							<td>#{o.price}</td>
+							<td>#{o.qty}</td>
+						</tr>
+					 
+					   </ui:repeat>
+					
 				</table>
 			</div>	
 			

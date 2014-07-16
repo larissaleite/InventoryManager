@@ -46,4 +46,42 @@ public class Produto implements Serializable {
 	public void setPreco(int preco) {
 		this.preco = preco;
 	}
+
+	/* É necessário Override esses 2 métodos para que a validação do Conversor ocorra de maneira correta */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + preco;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof Produto)) {
+			return false;
+		}
+		
+		Produto other = (Produto) obj;
+		if (id != other.id)
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		if (preco != other.preco)
+			return false;
+		
+		return true;
+	}
+
 }
