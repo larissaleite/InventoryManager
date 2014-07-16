@@ -14,8 +14,8 @@ import br.com.projeto.modelo.Produto;
 import br.com.projeto.modelo.Recebimento;
 import br.com.projeto.persistence.HibernateUtil;
 
+/* @SessionScoped faz com que os valores de produtos não atualizem quando um novo produto é inserido no banco */
 @ManagedBean(name="recebimentoMBean")
-@SessionScoped
 public class RecebimentoMBean {
 
 	private Produto produto;
