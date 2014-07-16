@@ -1,4 +1,4 @@
-stock-jsf
+InventoryManager
 =========
 
-Simple project to manage a stock using JSF
+Simple project to manage an inventory using JSF, Hibernate and PostgreSQL
