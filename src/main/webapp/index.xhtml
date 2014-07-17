@@ -2,7 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:f="http://java.sun.com/jsf/core">
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <head>
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"></link>
@@ -21,7 +22,7 @@
 		font-size:2rem;
 	}
 	
-	th {
+	th, tbody {
 		text-align:center;
 		font-weight:200;
 	}
@@ -35,13 +36,28 @@
 			<div class="panel panel-default">
 	 	 		<div class="panel-heading">Estoque 2014</div>
 				<table class="table">
-					<th>Mês</th><th>Produto</th><th>Recebimentos</th><th>Vendas</th><th>Em estoque</th><th>Preço</th><th>Lucro</th>
-
+					<thead>
+						<th>Mês</th><th>Produto</th><th>Recebimentos</th><th>Vendas</th><th>Em estoque</th><th>Preço</th><th>Lucro</th>
+					</thead>
+					<ui:repeat var="e" value="#{estoqueMBean.estoques}">
+					 
+						<tr>
+							<td> </td>
+							<td>#{e.nome}</td>
+							<td>#{e.recebimento_quantidade}</td>
+							<td>#{e.venda_quantidade}</td>
+							<td>#{e.estoque_quantidade}</td>
+							<td>R$ #{e.preco}</td>
+							<td>R$ #{e.lucro}</td>
+						</tr>
+					 
+					</ui:repeat>
+					
 				</table>
 			</div>		
 		</div>
 		<div class="btn-group">	
-			<button class="btn btn-default btn-lg dropdown-toggle" data-toggle="dropdown">Produtos <span class="caret"></span></button>
+			<button class="btn btn-default btn-lg dropdown-toggle" data-toggle="dropdown">Estoque <span class="caret"></span></button>
 			<ul class="dropdown-menu" role="menu">
 				<li><a href="produto.jsf">Produtos Cadastrados</a></li>
 				<li class="divider"></li>

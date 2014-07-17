@@ -1,14 +1,17 @@
 package br.com.projeto.bean;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import br.com.projeto.modelo.Estoque;
 import br.com.projeto.modelo.Mes;
 import br.com.projeto.modelo.Produto;
 import br.com.projeto.modelo.Recebimento;
@@ -37,6 +40,7 @@ public class RecebimentoMBean {
 		for (Produto produto : produtos) {
 			System.out.println(produto.getNome());
 		}
+		
 		
 		session.getTransaction().commit();
 		session.close();

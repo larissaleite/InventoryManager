@@ -34,8 +34,9 @@
 			<div class="panel panel-default">
 	 	 		<div class="panel-heading">Produtos</div>
 				<table class="table">
-					<th>Nome</th><th>Preço</th><th>Vendas (total)</th><th>Lucro (total)</th>
-					
+					<thead>
+						<th>Nome</th><th>Preço</th><th>Vendas (total)</th><th>Lucro (total)</th>
+					</thead>
 					<ui:repeat var="p" value="#{recebimentoMBean.produtos}">
 					 
 						<tr>
