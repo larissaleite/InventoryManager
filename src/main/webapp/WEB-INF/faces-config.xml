@@ -10,5 +10,23 @@
         <managed-bean-class>br.com.projeto.bean.ProdutoMBean</managed-bean-class>     
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
+    
+    <managed-bean>
+        <managed-bean-name>VendaMBean</managed-bean-name>
+        <managed-bean-class>br.com.projeto.bean.VendaMBean</managed-bean-class>     
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    
+    <managed-bean>
+        <managed-bean-name>RecebimentoMBean</managed-bean-name>
+        <managed-bean-class>br.com.projeto.bean.RecebimentoMBean</managed-bean-class>     
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    
+    <managed-bean>
+        <managed-bean-name>EstoqueMBean</managed-bean-name>
+        <managed-bean-class>br.com.projeto.bean.EstoqueMBean</managed-bean-class>     
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
    
 </faces-config>

@@ -6,7 +6,10 @@ import javax.faces.bean.ManagedBean;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import br.com.projeto.dao.IProdutoDao;
+import br.com.projeto.dao.impl.ProdutoDao;
 import br.com.projeto.modelo.Produto;
 import br.com.projeto.persistence.HibernateUtil;
 
@@ -14,6 +17,8 @@ import br.com.projeto.persistence.HibernateUtil;
 public class ProdutoMBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
+	private IProdutoDao produtoDao;
 	
 	private String nome;
 	private int preco;
@@ -59,7 +64,7 @@ public class ProdutoMBean implements Serializable {
 		produto.setPreco(preco);
 		System.out.println("Cadastrar Produto - "+produto.getNome()+"   "+produto.getPreco());
 		
-		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		/*SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 	    System.out.println("Inicializado session factory"); 
 		Session session = sessionFactory.openSession();
 		System.out.println("sessao aberta");
@@ -69,7 +74,9 @@ public class ProdutoMBean implements Serializable {
 	    
 	    session.getTransaction().commit();
 	    session.close();
-	    System.out.println("sessao fechada");
+	    System.out.println("sessao fechada");*/
+		produtoDao = new ProdutoDao();
+		produtoDao.salvarProduto(produto);
 		
 	}
 	
