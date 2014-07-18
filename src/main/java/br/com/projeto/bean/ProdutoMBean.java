@@ -5,8 +5,8 @@ import java.io.Serializable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import br.com.projeto.dao.IProdutoDao;
 import br.com.projeto.modelo.Produto;
+import br.com.projeto.service.IServiceEstoque;
 
 //@ManagedBean(name="produtoMBean")
 @Controller
@@ -15,7 +15,7 @@ public class ProdutoMBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Autowired
-	private IProdutoDao produtoDao;
+	private IServiceEstoque serviceEstoque;
 	
 	private String nome;
 	private int preco;
@@ -42,8 +42,8 @@ public class ProdutoMBean implements Serializable {
 		produto.setPreco(preco);
 		System.out.println("Cadastrar Produto - "+produto.getNome()+"   "+produto.getPreco());
 		
-		//produtoDao = new ProdutoDao();
-		produtoDao.salvarProduto(produto);
+		//produtoDao = new ProdutoDao(); nao é necessario com a injeção de dependencia do spring
+		serviceEstoque.cadastrarProduto(produto);
 		
 	}
 	

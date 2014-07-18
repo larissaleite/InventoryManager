@@ -2,20 +2,20 @@ package br.com.projeto.bean;
 
 import java.util.List;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-import br.com.projeto.dao.IVendaDao;
+import javax.annotation.PostConstruct;
+
 import br.com.projeto.modelo.Mes;
 import br.com.projeto.modelo.Produto;
 import br.com.projeto.modelo.Venda;
-import br.com.projeto.persistence.HibernateUtil;
+import br.com.projeto.service.IServiceEstoque;
 
 //@ManagedBean(name="vendaMBean")
 @Controller
+@Scope("request")
 public class VendaMBean {
 
 	private Produto produto;
@@ -25,24 +25,16 @@ public class VendaMBean {
 	private List<Produto> produtos;
 	
 	@Autowired
-	private IVendaDao vendaDao;
+	private IServiceEstoque serviceEstoque;
 	
 	public VendaMBean() {
-		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-	    System.out.println("Inicializado session factory"); 
-		Session session = sessionFactory.openSession();
-		System.out.println("sessao aberta");
-	    session.beginTransaction();  
-	    
-		Query query = session.createQuery("from Produto");
-
-		this.produtos = query.list();
-		for (Produto produto : produtos) {
-			System.out.println(produto.getNome());
-		}
-		
-		session.getTransaction().commit();
-		session.close();
+		//this.produtos = serviceEstoque.produtosCadastrados();
+	}
+	
+	@SuppressWarnings("restriction")
+	@PostConstruct
+	public void init() {
+		this.produtos = serviceEstoque.produtosCadastrados();
 	}
 	
 	public Produto getProduto() {
@@ -89,7 +81,7 @@ public class VendaMBean {
 		
 		System.out.println("Cadastrar venda - Qtd: "+quantidade+"  Produto: "+produto.getId()+"  Mes: "+mes);
 		
-		vendaDao.salvarVenda(venda);
+		serviceEstoque.cadastrarVenda(venda);
 	}
 	
 }

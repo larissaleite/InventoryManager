@@ -3,6 +3,7 @@ package br.com.projeto.dao;
 import java.io.Serializable;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -51,6 +52,7 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 	@SuppressWarnings("rawtypes")
 	public List hqlQuery(String sql) {
 		Query query = getCurrentSession().createSQLQuery(sql);
+		query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
 		return query.list();
 	}
 

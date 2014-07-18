@@ -2,18 +2,16 @@ package br.com.projeto.bean;
 
 import java.util.List;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-import br.com.projeto.dao.IRecebimentoDao;
+import javax.annotation.PostConstruct;
+
 import br.com.projeto.modelo.Mes;
 import br.com.projeto.modelo.Produto;
 import br.com.projeto.modelo.Recebimento;
-import br.com.projeto.persistence.HibernateUtil;
+import br.com.projeto.service.IServiceEstoque;
 
 /* @SessionScoped faz com que os valores de produtos não atualizem quando um novo produto é inserido no banco */
 //@ManagedBean(name="recebimentoMBean")
@@ -28,25 +26,15 @@ public class RecebimentoMBean {
 	private List<Produto> produtos;
 	
 	@Autowired
-	private IRecebimentoDao recebimentoDao;
+	private IServiceEstoque serviceEstoque;
 	
 	public RecebimentoMBean() {
-		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-	    System.out.println("Inicializado session factory"); 
-		Session session = sessionFactory.openSession();
-		System.out.println("sessao aberta");
-	    session.beginTransaction();  
-	    
-		Query query = session.createQuery("from Produto");
-
-		this.produtos = query.list();
-		for (Produto produto : produtos) {
-			System.out.println(produto.getNome());
-		}
-		
-		
-		session.getTransaction().commit();
-		session.close();
+		//this.produtos = serviceEstoque.produtosCadastrados();
+	}
+	
+	@PostConstruct
+	public void init() {
+		this.produtos = serviceEstoque.produtosCadastrados();
 	}
 	
 	public Produto getProduto() {
@@ -94,7 +82,7 @@ public class RecebimentoMBean {
 		
 		System.out.println("Cadastrar recebimento - Qtd: "+quantidade+"  Produto: "+produto.getId()+"  Mes: "+mes);
 		
-		recebimentoDao.salvarRecebimento(recebimento);
+		serviceEstoque.cadastrarRecebimento(recebimento);
 		
 	}
 	

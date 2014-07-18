@@ -1,6 +1,10 @@
 package br.com.projeto.modelo;
 
-public class Estoque {
+import java.io.Serializable;
+
+public class Estoque implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	
 	private Mes mes;
 	private String nome;
