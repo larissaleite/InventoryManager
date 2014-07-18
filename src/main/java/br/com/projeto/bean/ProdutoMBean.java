@@ -2,15 +2,10 @@ package br.com.projeto.bean;
 
 import java.io.Serializable;
 
-import javax.faces.bean.ManagedBean;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import br.com.projeto.dao.IProdutoDao;
-import br.com.projeto.dao.impl.ProdutoDao;
 import br.com.projeto.modelo.Produto;
 
 //@ManagedBean(name="produtoMBean")

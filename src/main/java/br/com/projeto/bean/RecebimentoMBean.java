@@ -1,19 +1,15 @@
 package br.com.projeto.bean;
 
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
-import javax.faces.bean.ManagedBean;
-
-import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-import br.com.projeto.modelo.Estoque;
+import br.com.projeto.dao.IRecebimentoDao;
 import br.com.projeto.modelo.Mes;
 import br.com.projeto.modelo.Produto;
 import br.com.projeto.modelo.Recebimento;
@@ -30,6 +26,9 @@ public class RecebimentoMBean {
 	private Mes mes;
 	
 	private List<Produto> produtos;
+	
+	@Autowired
+	private IRecebimentoDao recebimentoDao;
 	
 	public RecebimentoMBean() {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
@@ -95,17 +94,8 @@ public class RecebimentoMBean {
 		
 		System.out.println("Cadastrar recebimento - Qtd: "+quantidade+"  Produto: "+produto.getId()+"  Mes: "+mes);
 		
-		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-	    System.out.println("Inicializado session factory"); 
-		Session session = sessionFactory.openSession();
-		System.out.println("sessao aberta");
-	    session.beginTransaction();  
-	    
-	    session.save(recebimento);
-	    
-	    session.getTransaction().commit();
-	    session.close();
-	    System.out.println("sessao fechada");
+		recebimentoDao.salvarRecebimento(recebimento);
+		
 	}
 	
 	

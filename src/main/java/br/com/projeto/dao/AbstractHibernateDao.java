@@ -3,11 +3,10 @@ package br.com.projeto.dao;
 import java.io.Serializable;
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import br.com.projeto.persistence.HibernateUtil;
 
 public abstract class AbstractHibernateDao<T extends Serializable> {
 
@@ -48,10 +47,14 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 		final T entity = findOne(id);
 		delete(entity);
 	}
+	
+	@SuppressWarnings("rawtypes")
+	public List hqlQuery(String sql) {
+		Query query = getCurrentSession().createSQLQuery(sql);
+		return query.list();
+	}
 
 	protected final Session getCurrentSession() {
-		//sessionFactory = HibernateUtil.getSessionFactory();
-		//Session session = sessionFactory.openSession();
 		return sessionFactory.getCurrentSession();
 	}
 

@@ -2,14 +2,13 @@ package br.com.projeto.bean;
 
 import java.util.List;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import br.com.projeto.dao.IVendaDao;
 import br.com.projeto.modelo.Mes;
 import br.com.projeto.modelo.Produto;
 import br.com.projeto.modelo.Venda;
@@ -24,6 +23,9 @@ public class VendaMBean {
 	private Mes mes;
 	
 	private List<Produto> produtos;
+	
+	@Autowired
+	private IVendaDao vendaDao;
 	
 	public VendaMBean() {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
@@ -87,19 +89,7 @@ public class VendaMBean {
 		
 		System.out.println("Cadastrar venda - Qtd: "+quantidade+"  Produto: "+produto.getId()+"  Mes: "+mes);
 		
-		System.out.println("Cadastrar recebimento - Qtd: "+quantidade+"  Produto: "+produto.getId()+"  Mes: "+mes);
-		
-		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-	    System.out.println("Inicializado session factory"); 
-		Session session = sessionFactory.openSession();
-		System.out.println("sessao aberta");
-	    session.beginTransaction();  
-	    
-	    session.save(venda);
-	    
-	    session.getTransaction().commit();
-	    session.close();
-	    System.out.println("sessao fechada");
+		vendaDao.salvarVenda(venda);
 	}
 	
 }

@@ -1,5 +1,7 @@
 package br.com.projeto.dao;
 
-public interface IRecebimentoDao {
+import br.com.projeto.modelo.Recebimento;
 
+public interface IRecebimentoDao {
+	public void salvarRecebimento(Recebimento recebimento);
 }
