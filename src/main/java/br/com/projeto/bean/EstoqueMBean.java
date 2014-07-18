@@ -10,11 +10,13 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Controller;
 
 import br.com.projeto.modelo.Estoque;
 import br.com.projeto.persistence.HibernateUtil;
 
-@ManagedBean(name="estoqueMBean")
+//@ManagedBean(name="estoqueMBean")
+@Controller
 public class EstoqueMBean {
 	
 	List<Estoque> estoques;

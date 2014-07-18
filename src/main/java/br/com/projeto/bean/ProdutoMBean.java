@@ -4,43 +4,26 @@ import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
 
 import br.com.projeto.dao.IProdutoDao;
 import br.com.projeto.dao.impl.ProdutoDao;
 import br.com.projeto.modelo.Produto;
-import br.com.projeto.persistence.HibernateUtil;
 
-@ManagedBean(name="produtoMBean")
+//@ManagedBean(name="produtoMBean")
+@Controller
 public class ProdutoMBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
+	@Autowired
 	private IProdutoDao produtoDao;
 	
 	private String nome;
 	private int preco;
-	
-	/*
-	 * Não funciona para acessar os campos da classe Produto de dentro do xhtml
-	 * 
-	private Produto produto;
-
-	public ProdutoMBean() {
-		produto = new Produto();
-	}
-	
-	public Produto getProduto() {
-		return produto;
-	}
-
-	public void setProduto(Produto produto) {
-		this.produto = produto;
-	}
-	
-	*/
 	
 	public String getNome() {
 		return nome;
@@ -64,18 +47,7 @@ public class ProdutoMBean implements Serializable {
 		produto.setPreco(preco);
 		System.out.println("Cadastrar Produto - "+produto.getNome()+"   "+produto.getPreco());
 		
-		/*SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-	    System.out.println("Inicializado session factory"); 
-		Session session = sessionFactory.openSession();
-		System.out.println("sessao aberta");
-	    session.beginTransaction();  
-	    
-	    session.save(produto);
-	    
-	    session.getTransaction().commit();
-	    session.close();
-	    System.out.println("sessao fechada");*/
-		produtoDao = new ProdutoDao();
+		//produtoDao = new ProdutoDao();
 		produtoDao.salvarProduto(produto);
 		
 	}

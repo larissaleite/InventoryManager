@@ -6,22 +6,28 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.projeto.dao.AbstractHibernateDao;
 import br.com.projeto.dao.IProdutoDao;
 import br.com.projeto.modelo.Produto;
 import br.com.projeto.persistence.HibernateUtil;
 
-public class ProdutoDao implements IProdutoDao {
+@Repository
+@Transactional
+public class ProdutoDao extends AbstractHibernateDao<Produto> implements IProdutoDao {
 
+	@Autowired
     private SessionFactory sessionFactory;
 	
 	public ProdutoDao() {
-		sessionFactory = HibernateUtil.getSessionFactory();
+		super();
+		super.setClasse(Produto.class);
+		//sessionFactory = HibernateUtil.getSessionFactory();
 	}
 	
 	public void salvarProduto(Produto produto) {
-		Session session = sessionFactory.openSession();
+		/*Session session = sessionFactory.openSession();
 		System.out.println("sessao aberta");
 	    session.beginTransaction();  
 	    
@@ -29,11 +35,13 @@ public class ProdutoDao implements IProdutoDao {
 	    
 	    session.getTransaction().commit();
 	    session.close();
-	    System.out.println("sessao fechada");
+	    System.out.println("sessao fechada");*/
+		super.save(produto);
+		
 	}
 
 	public List<Produto> produtosSalvos() {
-		List<Produto> produtos = null;
+		List<Produto> produtos = super.findAll();
 		return produtos;
 	}
 	

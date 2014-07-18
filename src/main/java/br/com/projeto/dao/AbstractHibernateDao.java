@@ -12,7 +12,8 @@ import br.com.projeto.persistence.HibernateUtil;
 public abstract class AbstractHibernateDao<T extends Serializable> {
 
 	private Class<T> classe;
-
+	
+	@Autowired
 	private SessionFactory sessionFactory;
 
 	public void setClasse(final Class<T> classToSet) {
@@ -49,9 +50,9 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 	}
 
 	protected final Session getCurrentSession() {
-		sessionFactory = HibernateUtil.getSessionFactory();
-		Session session = sessionFactory.openSession();
-		return session;
+		//sessionFactory = HibernateUtil.getSessionFactory();
+		//Session session = sessionFactory.openSession();
+		return sessionFactory.getCurrentSession();
 	}
 
 }

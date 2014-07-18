@@ -8,13 +8,15 @@ import javax.faces.bean.SessionScoped;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Controller;
 
 import br.com.projeto.modelo.Mes;
 import br.com.projeto.modelo.Produto;
 import br.com.projeto.modelo.Venda;
 import br.com.projeto.persistence.HibernateUtil;
 
-@ManagedBean(name="vendaMBean")
+//@ManagedBean(name="vendaMBean")
+@Controller
 public class VendaMBean {
 
 	private Produto produto;

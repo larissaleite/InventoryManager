@@ -10,6 +10,8 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
 
 import br.com.projeto.modelo.Estoque;
 import br.com.projeto.modelo.Mes;
@@ -18,7 +20,9 @@ import br.com.projeto.modelo.Recebimento;
 import br.com.projeto.persistence.HibernateUtil;
 
 /* @SessionScoped faz com que os valores de produtos não atualizem quando um novo produto é inserido no banco */
-@ManagedBean(name="recebimentoMBean")
+//@ManagedBean(name="recebimentoMBean")
+@Controller
+@Scope("request")
 public class RecebimentoMBean {
 
 	private Produto produto;
