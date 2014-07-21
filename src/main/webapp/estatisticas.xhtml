@@ -212,9 +212,7 @@
 			margin-bottom:10rem;	
 		}
 		
-		li.active,
-		li.active:hover, 
-		li.active:focus  {
+		#scroll-menu li>a:hover,#scroll-menu li>a:focus,#scroll-menu li.active {
 		    background: #9CF;
 		}
 		li.active a,
@@ -231,7 +229,7 @@
 	
 </head>
 
-<body>
+<body data-spy="scroll" data-target="#scroll-menu">
 
 <div class="container">
 	
