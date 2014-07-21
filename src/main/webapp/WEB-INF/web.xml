@@ -5,25 +5,45 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns
   <display-name>Archetype Created Web Application</display-name>
   
 <welcome-file-list> 
-<welcome-file>index.jsf</welcome-file> 
-
+	<welcome-file>index.jsf</welcome-file> 
 </welcome-file-list> 
+
 <servlet> 
-<servlet-name>Faces Servlet</servlet-name> 
-<servlet-class>javax.faces.webapp.FacesServlet</servlet-class> 
-<load-on-startup>1</load-on-startup> 
+	<servlet-name>Faces Servlet</servlet-name> 
+	<servlet-class>javax.faces.webapp.FacesServlet</servlet-class> 
+	<load-on-startup>1</load-on-startup> 
 </servlet> 
+
+<servlet>
+		<servlet-name>jersey-serlvet</servlet-name>
+		<servlet-class>
+                     com.sun.jersey.spi.container.servlet.ServletContainer
+                </servlet-class>
+		<init-param>
+		     <param-name>com.sun.jersey.config.property.packages</param-name>
+		     <param-value>br.com.projeto.jersey</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
 <session-config> 
-<session-timeout>5</session-timeout> 
+	<session-timeout>5</session-timeout> 
 </session-config> 
+
 <servlet-mapping> 
-<servlet-name>Faces Servlet</servlet-name> 
-<url-pattern>*.jsf</url-pattern> 
-<url-pattern>*.faces</url-pattern> 
+	<servlet-name>Faces Servlet</servlet-name> 
+	<url-pattern>*.jsf</url-pattern> 
+	<url-pattern>*.faces</url-pattern> 
 </servlet-mapping>	
+
+<servlet-mapping>
+		<servlet-name>jersey-serlvet</servlet-name>
+		<url-pattern>/rest/*</url-pattern>
+	</servlet-mapping>
+
 <context-param> 
-<param-name>javax.faces.STATE_SAVING_METHOD</param-name> 
-<param-value>client</param-value> 
+	<param-name>javax.faces.STATE_SAVING_METHOD</param-name> 
+	<param-value>client</param-value> 
 </context-param>
 
 <listener>
