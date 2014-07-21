@@ -1,0 +1,271 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<head>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"></link>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>	
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/1.4.3/jquery.scrollTo.min.js"></script>
+	
+	<!--  had to remove highchart reference as highstock already includes highcharts. with both files = undefined is not a function for highstock -->
+	<script src="http://code.highcharts.com/stock/highstock.js"></script>
+	<script src="http://code.highcharts.com/stock/modules/exporting.js"></script>
+	
+	<script type="text/javascript">
+	$(function () {
+        $('#graficoVendasMensal').highcharts({
+        	title: {
+                text: 'Quantidade de vendas em 2014',
+                x: -20 //center
+            },
+            xAxis: {
+                categories: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun',
+                    'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
+            },
+            yAxis: {
+                title: {
+                    text: 'Quantidade'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle',
+                borderWidth: 0
+            },
+            series: [{
+                name: 'Vendas',
+                data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
+            }]
+        });
+
+
+        $('#graficoLucroAnual').highcharts({
+            title: {
+                text: 'Lucro em 2014',
+                x: -20 //center
+            },
+            xAxis: {
+                categories: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun',
+                    'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
+            },
+            yAxis: {
+                title: {
+                    text: 'Quantidade'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle',
+                borderWidth: 0
+            },
+            series: [{
+                name: 'Lucro',
+                color: '#04B486',
+                data: [10.0, 6.9, 5.5, 14.5, 7.2, 9.5, 25.2, 40.5, 23.3, 21.3, 13.9, 15.6]
+            }]
+        });
+
+
+        $('#graficoVendasRecebimentosMensal').highcharts({
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Vendas e Recebimentos por mês'
+            },
+            xAxis: {
+                categories: [
+                    'Monitor',
+                    'Teclado',
+                    'Pen Drive',
+                    'Mouse Pad',
+                    'Impressora',
+                    'Caneca',
+                    'Caderno',
+                    'Cartucho'
+                ]
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Quantidade'
+                }
+            },
+            series: [{
+                name: 'Recebimentos',
+                data: [84.9, 78.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5]
+    
+            }, {
+                name: 'Vendas',
+                data: [40.6, 71.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3]
+    
+            }]
+        });
+
+    	$('#graficoTempoReal').highcharts('StockChart', {
+    		chart : {
+    			events : {
+    				load : function() {
+
+    					// set up the updating of the chart each second
+    					var series = this.series[0];
+    					setInterval(function() {
+    						var x = (new Date()).getTime(), // current time
+    						y = Math.round(Math.random() * 100);
+    						series.addPoint([x, y], true, true);
+    					}, 1000);
+    				}
+    			}
+    		},
+    		
+    		rangeSelector: {
+    			buttons: [{
+    				count: 1,
+    				type: 'minute',
+    				text: '1M'
+    			}, {
+    				count: 5,
+    				type: 'minute',
+    				text: '5M'
+    			}, {
+    				type: 'all',
+    				text: 'All'
+    			}],
+    			inputEnabled: false,
+    			selected: 0
+    		},
+    		
+    		title : {
+    			text : 'Live random data'
+    		},
+    		
+    		exporting: {
+    			enabled: false
+    		},
+    		
+    		series : [{
+    			name : 'Random data',
+    			data : (function() {
+    				// generate an array of random data
+    				var data = [], time = (new Date()).getTime(), i;
+    				//<![CDATA[ 
+    				for( i = -999; i <= 0; i++) {
+    					data.push([
+    						time + i * 1000,
+    						Math.round(Math.random() * 100)
+    					]);
+    				}
+    				//]]>
+    				return data;
+    			})()
+    		}]
+    	});
+        
+    });
+
+	$( document ).ready(function() {
+		
+		/* activate scrollspy menu */
+		$('#graficosContainer').scrollspy({
+		  target: '#scroll-menu',
+		  offset: 50
+		});
+	
+		$("ul li a[href^='#']").bind('click', function(e) {
+			   // prevent default anchor click behavior
+			   e.preventDefault();
+	
+			   // store hash
+			   var hash = this.hash;
+	
+			   // animate
+	           $.scrollTo(hash, 1000);
+	
+			});
+	});
+	</script>
+
+	<style>
+	
+		.container {
+			margin-top:5rem;
+		}
+		
+		.graficos {
+			margin-bottom:10rem;	
+		}
+		
+		li.active,
+		li.active:hover, 
+		li.active:focus  {
+		    background: #9CF;
+		}
+		li.active a,
+		li.active:hover a, 
+		li:focus a  {
+		    color: #FFF;
+		}
+		
+		#scroll-nav {
+			position:fixed;
+		}
+		
+	</style>
+	
+</head>
+
+<body>
+
+<div class="container">
+	
+	<div class="col-xs-6 col-lg-4" id="scroll-menu">
+	    <ul class="nav nav-list" id="scroll-nav">
+	        <li><a href="#graficoVendasMensal">Vendas Anuais</a></li>
+	        <li><a href="#graficoLucroAnual">Lucro Anual</a></li>
+	        <li><a href="#graficoVendasRecebimentosMensal">Vendas e recebimentos mensais</a></li>
+	        <li><a href="#graficoTempoReal">Stock Chart</a></li>
+	    </ul>
+	</div>
+
+
+	<div id="graficosContainer" class="col-xs-12 col-sm-6 col-lg-8">
+		<div class="graficos">
+			<section id="graficoVendasMensal"></section>
+		</div>
+		
+		<div class="graficos">
+			<section id="graficoLucroAnual"></section>
+		</div>
+		
+		<div class="graficos">
+			<section id="graficoVendasRecebimentosMensal"></section>
+		</div>
+		
+		<div class="graficos">
+			<section id="graficoTempoReal"></section>
+		</div>
+		
+	</div>
+
+</div>
+
+</body>
+
+</html>

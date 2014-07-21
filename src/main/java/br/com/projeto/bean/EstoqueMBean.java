@@ -26,6 +26,7 @@ public class EstoqueMBean {
 		//this.estoques = serviceEstoque.recuperarEstoque();
 	}
 	
+	//method which is to be executed when the class has been constructed and all dependency injections are been finished
 	@SuppressWarnings("restriction")
 	@PostConstruct
 	public void init() {
