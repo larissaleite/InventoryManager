@@ -52,4 +52,8 @@ public class ServiceEstoque implements IServiceEstoque {
 		return daoEstoque.recuperarEstoque();
 	}
 
+	public List<Integer> recuperarQuantVendas() {
+		return daoVenda.recuperarQuantVendas();
+	}
+
 }

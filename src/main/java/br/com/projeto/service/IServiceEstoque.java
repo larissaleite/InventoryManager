@@ -15,5 +15,6 @@ public interface IServiceEstoque {
 	
 	public List<Produto> produtosCadastrados();
 	public List<Estoque> recuperarEstoque();
+	public List<Integer> recuperarQuantVendas();
 	
 }
