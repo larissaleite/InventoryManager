@@ -34,7 +34,7 @@ public class VendaMBean {
 	@SuppressWarnings("restriction")
 	@PostConstruct
 	public void init() {
-		this.produtos = serviceEstoque.produtosCadastrados();
+		this.produtos = serviceEstoque.produtosRecebidos();
 	}
 	
 	public Produto getProduto() {

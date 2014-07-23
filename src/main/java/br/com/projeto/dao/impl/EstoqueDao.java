@@ -11,6 +11,7 @@ import br.com.projeto.dao.AbstractHibernateDao;
 import br.com.projeto.dao.IEstoqueDao;
 import br.com.projeto.modelo.Estoque;
 import br.com.projeto.modelo.Mes;
+import br.com.projeto.modelo.Produto;
 
 @Repository
 @Transactional /* colocar em cada método especificamente? */
@@ -146,6 +147,21 @@ public class EstoqueDao extends AbstractHibernateDao<Estoque> implements IEstoqu
 		}
 		
 		return lucroAnual;
+	}
+	
+	public int estoqueProdutoMes (Produto produto, Mes mes) {
+		
+		String query = "SELECT r.recebimento_quantidade - v.venda_quantidade AS estoque FROM produto AS p "
+				+ " LEFT OUTER JOIN ( SELECT mes, produto_id, SUM(quantidade) AS recebimento_quantidade FROM recebimento GROUP BY mes, produto_id  ) AS r ON  p.id_produto = r.produto_id "
+				+ " LEFT OUTER JOIN ( SELECT mes, produto_id, SUM(quantidade) AS venda_quantidade FROM venda GROUP BY mes, produto_id ) AS v  "
+				+ " ON  p.id_produto = v.produto_id WHERE p.id_produto='"+produto.getId()+"' AND v.mes='"+mes.ordinal()+"' AND r.mes='"+mes.ordinal()+"';";
+		
+		@SuppressWarnings("rawtypes")
+		List produtoEstoque = super.hqlQuery(query);
+		
+		int estoque = Integer.parseInt(produtoEstoque.get(0).toString());
+
+		return estoque;
 	}
 
 }

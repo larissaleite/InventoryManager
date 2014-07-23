@@ -7,4 +7,5 @@ import br.com.projeto.modelo.Produto;
 public interface IProdutoDao {
 	public void salvarProduto(Produto produto);
 	public List<Produto> produtosSalvos();
+	public List<Produto> produtosRecebidos();
 }

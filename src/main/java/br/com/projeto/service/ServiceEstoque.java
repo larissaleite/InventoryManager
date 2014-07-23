@@ -65,4 +65,12 @@ public class ServiceEstoque implements IServiceEstoque {
 		return daoEstoque.lucroAnual();
 	}
 
+	public List<Produto> produtosRecebidos() {
+		return daoProduto.produtosRecebidos();
+	}
+
+	public int estoqueProdutoMes(Produto produto, Mes mes) {
+		return daoEstoque.estoqueProdutoMes(produto, mes);
+	}
+
 }

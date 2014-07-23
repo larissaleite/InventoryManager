@@ -15,9 +15,12 @@ public interface IServiceEstoque {
 	public void cadastrarVenda(Venda venda);
 	
 	public List<Produto> produtosCadastrados();
+	public List<Produto> produtosRecebidos();
 	public List<Estoque> recuperarEstoque();
 	public List<Estoque> recuperarEstoqueNoMes(Mes mes);
 	public List<Integer> recuperarQuantVendas();
 	public List<Integer> lucroAnual();
+	
+	public int estoqueProdutoMes(Produto produto, Mes mes);
 	
 }
