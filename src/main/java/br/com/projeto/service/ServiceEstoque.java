@@ -10,6 +10,7 @@ import br.com.projeto.dao.IProdutoDao;
 import br.com.projeto.dao.IRecebimentoDao;
 import br.com.projeto.dao.IVendaDao;
 import br.com.projeto.modelo.Estoque;
+import br.com.projeto.modelo.Mes;
 import br.com.projeto.modelo.Produto;
 import br.com.projeto.modelo.Recebimento;
 import br.com.projeto.modelo.Venda;
@@ -54,6 +55,14 @@ public class ServiceEstoque implements IServiceEstoque {
 
 	public List<Integer> recuperarQuantVendas() {
 		return daoVenda.recuperarQuantVendas();
+	}
+
+	public List<Estoque> recuperarEstoqueNoMes(Mes mes) {
+		return daoEstoque.recuperarEstoqueDoMes(mes);
+	}
+
+	public List<Integer> lucroAnual() {
+		return daoEstoque.lucroAnual();
 	}
 
 }

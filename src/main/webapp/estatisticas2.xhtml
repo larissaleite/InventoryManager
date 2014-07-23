@@ -18,6 +18,7 @@
 	
 	<script type="text/javascript">
 	$(function () {
+		
        var graficoVM = {
         	chart: {
             	renderTo: 'graficoVendasMensal',
@@ -28,7 +29,7 @@
 				            contentType: "application/json; charset=utf-8",  
 				            dataType: 'json',  
 				            success: function(data) {  
-				                    //manipulando seu JSON
+				                    //manipulando o JSON
 			                    console.log(data); 
 			                    grafico.series[0].setData(data, true);
 				            } 
@@ -68,14 +69,28 @@
 
 		
 		var grafico = new Highcharts.Chart(graficoVM);
-       if (typeof addChart == 'function') { addChart('graficoVendasMensal', grafico ); }
+        if (typeof addChart == 'function') { 
+            addChart('graficoVendasMensal', grafico ); 
+        }
 		 
-	});
-
-    	
-
-
-     /*   $('#graficoLucroAnual').highcharts({
+		var graficoLA = {
+				chart: {
+	            	renderTo: 'graficoLucroAnual',
+	                events: {
+						load: function() {
+							$.ajax({          
+					            url: '/ProjetoJSF/rest/hello/lucroAnual',  
+					            contentType: "application/json; charset=utf-8",  
+					            dataType: 'json',  
+					            success: function(data) {  
+					                    //manipulando o JSON
+				                    console.log(data); 
+				                    grafico3.series[0].setData(data, true);
+					            } 
+					        });  
+						}
+	               	}
+	            },
             title: {
                 text: 'Lucro em 2014',
                 x: -20 //center
@@ -103,29 +118,55 @@
             series: [{
                 name: 'Lucro',
                 color: '#04B486',
-                data: [10.0, 6.9, 5.5, 14.5, 7.2, 9.5, 25.2, 40.5, 23.3, 21.3, 13.9, 15.6]
+                data: []
             }]
-        });
+        }
 
+		var grafico3 = new Highcharts.Chart(graficoLA);
+        if (typeof addChart == 'function') { 
+            addChart('graficoLucroAnual', grafico3 ); 
+        }
 
-        $('#graficoVendasRecebimentosMensal').highcharts({
+		
+        var graficoVRM = {
             chart: {
-                type: 'column'
+                type: 'column',
+                renderTo: 'graficoVendasRecebimentosMensal',
+                events: {
+					load: function() {
+						$.ajax({          
+				            url: '/ProjetoJSF/rest/hello/estoqueMes',  
+				            contentType: "application/json; charset=utf-8",  
+				            dataType: 'json',  
+				            success: function(data) {  
+				                    //manipulando o JSON
+			                    console.log(data); 
+			                    console.log(data[0].recebimento_quantidade);
+			                    console.log(data[0].nome);
+			                    var recebimentos_quantidades = [];
+			                    var vendas_quantidades = [];
+			                    var nomes = [];
+			                  //<![CDATA[ 
+			                    for (var i=0; i < data.length ; i++) {
+									recebimentos_quantidades[i] = data[i].recebimento_quantidade;
+									vendas_quantidades[i] = data[i].venda_quantidade;
+									nomes[i] = data[i].nome;
+					            }
+					         
+			                    grafico2.series[0].setData(recebimentos_quantidades, true);
+			                    grafico2.series[1].setData(vendas_quantidades, true);
+			                    grafico2.xAxis[0].setCategories(nomes);
+			                  //]]>
+				            } 
+				        });  
+					}
+               	}
             },
             title: {
                 text: 'Vendas e Recebimentos por mês'
             },
             xAxis: {
-                categories: [
-                    'Monitor',
-                    'Teclado',
-                    'Pen Drive',
-                    'Mouse Pad',
-                    'Impressora',
-                    'Caneca',
-                    'Caderno',
-                    'Cartucho'
-                ]
+                categories: []
             },
             yAxis: {
                 min: 0,
@@ -135,16 +176,21 @@
             },
             series: [{
                 name: 'Recebimentos',
-                data: [84.9, 78.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5]
+                data: []
     
             }, {
                 name: 'Vendas',
-                data: [40.6, 71.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3]
+                data: []
     
             }]
-        });
+        }
 
-    	$('#graficoTempoReal').highcharts('StockChart', {
+		var grafico2 = new Highcharts.Chart(graficoVRM);
+        if (typeof addChart == 'function') { 
+            addChart('graficoVendasRecebimentosMensal', grafico2 ); 
+        }
+
+    	/*$('#graficoTempoReal').highcharts('StockChart', {
     		chart : {
     			events : {
     				load : function() {
@@ -202,8 +248,8 @@
     			})()
     		}]
     	});
-        
-    });*/
+       */ 
+    });
 
 	$( document ).ready(function() {
 		
@@ -275,8 +321,8 @@
 
 
 	<div id="graficosContainer" class="col-xs-12 col-sm-6 col-lg-8">
-		<div class="graficos" id="graficoVendasMensal">
-			
+		<div class="graficos">
+			<section id="graficoVendasMensal"></section>
 		</div>
 		
 		<div class="graficos">
